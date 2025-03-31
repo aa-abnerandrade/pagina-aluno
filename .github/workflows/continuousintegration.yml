@@ -26,8 +26,11 @@ jobs:
       - name: Upload Files
         uses: actions/upload-artifact@v4
         with:
-          name: github-pages  # <-- Alterado para "github-pages"
-          path: .
+          name: github-pages
+          path: |
+            index.html
+            styles.css
+            main.js
 
   deploy:
     name: Deploy
@@ -42,5 +45,7 @@ jobs:
         with:
           name: github-pages
           path: .
+      - name: Verificar e remover symlinks
+        run: find . -type l -exec rm {} \;
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
