@@ -1,4 +1,4 @@
-name: Deploy GitHub Pages
+name: Integration
 
 on:
   push:
@@ -9,31 +9,15 @@ on:
       - main
   workflow_dispatch:
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
 jobs:
-  deploy:
-    name: Deploy to GitHub Pages
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ github.event.inputs.url || github.event.repository.homepage }} # Adicionado para referência
-
     steps:
-      - name: Checkout
+      - name: Checkout código
         uses: actions/checkout@v4
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Upload artefato do site
+        uses: actions/upload-artifact@v4
         with:
-          path: '.' # Envia todo o conteúdo do repositório
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          name: website-files
+          path: .
