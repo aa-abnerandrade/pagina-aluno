@@ -1,4 +1,4 @@
-name: Delivery
+name: DeliveryDeployment
 
 on:
   workflow_run:
@@ -12,19 +12,36 @@ permissions:
   id-token: write
 
 jobs:
-  deploy:
+  
+  deliver:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
     steps:
       - name: Baixar artefato
         uses: actions/download-artifact@v4
         with:
           name: website-files
           path: .
-
+      
       - name: Configurar Pages
         uses: actions/configure-pages@v4
+
+      - name: Re-upload do artefato para Deploy
+        uses: actions/upload-artifact@v4
+        with:
+          name: prepared-website
+          path: .
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: deliver
+    environment:
+      name: github-pages
+    steps:
+      - name: Baixar artefato preparado
+        uses: actions/download-artifact@v4
+        with:
+          name: prepared-website
+          path: .
 
       - name: Fazer upload para GitHub Pages
         uses: actions/upload-pages-artifact@v2
