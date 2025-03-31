@@ -35,11 +35,12 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
+    if: github.ref == 'refs/heads/main'  # <-- Só faz deploy se estiver na branch main
     steps:
       - name: Download Files
         uses: actions/download-artifact@v4
         with:
-          name: github-pages  # <-- Agora ele encontra o artifact correto
+          name: github-pages
           path: .
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
