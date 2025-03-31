@@ -1,0 +1,35 @@
+name: Delivery
+
+on:
+  workflow_run:
+    workflows: ["Integration"]
+    types:
+      - completed
+  workflow_dispatch:
+
+permissions:
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+    steps:
+      - name: Baixar artefato
+        uses: actions/download-artifact@v4
+        with:
+          name: website-files
+          path: .
+
+      - name: Configurar Pages
+        uses: actions/configure-pages@v4
+
+      - name: Fazer upload para GitHub Pages
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: .
+
+      - name: Deploy para GitHub Pages
+        uses: actions/deploy-pages@v4
