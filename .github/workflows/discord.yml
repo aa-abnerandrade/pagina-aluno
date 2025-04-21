@@ -6,8 +6,10 @@ jobs:
     discord:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
-            - name: Run Discord Webhook
-              uses: tenzin1308/discord-notification@v1.0.0
+            - name: Send Discord Message
+              uses: sarge841/action-discord-webhook@v1
               with:
-                    discord-webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
+                webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
+                content: 'A new commit by ${{ github.actor }}!'
+
+                
