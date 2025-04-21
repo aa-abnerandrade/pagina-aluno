@@ -8,8 +8,6 @@ jobs:
         steps:
             - uses: actions/checkout@v4
             - name: Run Discord Webhook
-              uses: Sniddl/discord-commits@1.6
+              uses: tenzin1308/discord-notification@v1.0.0
               with:
-                    webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
-                    template: "avatar-with-link"
-                    include-extras: true
+                    discord-webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
