@@ -1,4 +1,4 @@
-name: DeliveryDeployment
+name: Delivery
 
 on:
   workflow_run:
@@ -14,6 +14,7 @@ permissions:
 jobs:
   
   deliver:
+    name: Preparar artefato para entrega
     runs-on: ubuntu-latest
     steps:
       - name: Baixar artefato
@@ -32,6 +33,7 @@ jobs:
           path: .
 
   deploy:
+    name: Deploy para GitHub Pages
     runs-on: ubuntu-latest
     needs: deliver
     environment:

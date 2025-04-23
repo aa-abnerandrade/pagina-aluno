@@ -1,15 +1,21 @@
 name: Discord
+
 on:
-    - push
+  push:
+    branches:
+      - main
+      - dev
 
 jobs:
-    discord:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Send Discord Message
-              uses: sarge841/action-discord-webhook@v1
-              with:
-                webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
-                content: 'A new commit by ${{ github.actor }}!'
-
-                
+  discord:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Discord Message
+        uses: sarge841/action-discord-webhook@v1
+        with:
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
+          content: |
+            🛠️ Novo commit por **${{ github.actor }}**
+            🔀 Branch: ${{ github.ref }}
+            📝 Mensagem: ${{ github.event.head_commit.message }}
+            🔗 [Ver no GitHub](${{ github.event.head_commit.url }})
