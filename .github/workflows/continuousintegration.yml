@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - main
+      - dev
   pull_request:
     branches:
       - main
+      - dev
   workflow_dispatch:
 
 jobs:
@@ -14,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout código
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Upload artefato do site
         uses: actions/upload-artifact@v4
@@ -22,3 +24,6 @@ jobs:
           name: website-files
           path: .
 
+      - name: Verificar se index.html existe
+        run: test -f index.html && echo "index.html encontrado" || exit 1
+        
