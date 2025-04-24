@@ -26,4 +26,25 @@ jobs:
 
       - name: Verificar se index.html existe
         run: test -f index.html && echo "index.html encontrado" || exit 1
+
+  tests:
+    name: Rodar Testes em test.js
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v3
+
+      - name: Instalar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+      
+      - name: Instalar dependências 
+        run: npm install jsdom
+
+      - name: Executar testes em test.js
+        run: |
+          echo "Executando test.js com Node.js..."
+          node test.js
         
