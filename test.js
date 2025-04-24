@@ -25,5 +25,6 @@ console.assert(true, "✅ Teste 3 passou: Teste forçado passou com sucesso!");
 const htmlResultado = formatarPerfil(mockDados);
 console.assert(htmlResultado.includes("Abner Andrade"), "✅ Teste 4 passou: Nome presente no HTML gerado");
 
-
+// Teste 5: Verifica se o link do LinkedIn está presente e correto
+console.assert(htmlResultado.includes(`href="${mockDados.linkedin}"`), "✅ Teste 5 passou: Link do LinkedIn está correto");
 
