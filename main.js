@@ -13,26 +13,35 @@ function formatarPerfil(dados) {
     `;
 }
 
+// ✅ Só executa no navegador
+if (typeof window !== "undefined" && typeof document !== "undefined") {
+    const form = document.querySelector("form");
 
-form.addEventListener("submit", function (event) {
-    event.preventDefault();
+    if (form) {
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
 
-    const dados = {
-        nome: form.nome.value,
-        documento: form.documento.value,
-        curso: form.curso.value,
-        faculdade: form.faculdade.value,
-        idade: form.idade.value,
-        email: form.email.value,
-        telefone: form.telefone.value,
-        bio: form.bio.value,
-        linkedin: form.linkedin.value,
-    };
+            const dados = {
+                nome: form.nome.value,
+                documento: form.documento.value,
+                curso: form.curso.value,
+                faculdade: form.faculdade.value,
+                idade: form.idade.value,
+                email: form.email.value,
+                telefone: form.telefone.value,
+                bio: form.bio.value,
+                linkedin: form.linkedin.value,
+            };
 
-    const resultado = document.createElement("div");
-    resultado.classList.add("perfil");
+            const resultado = document.createElement("div");
+            resultado.classList.add("perfil");
 
-    resultado.innerHTML = formatarPerfil(dados);
+            resultado.innerHTML = formatarPerfil(dados);
 
-    form.replaceWith(resultado); // substitui o formulário pelo perfil
-});
+            form.replaceWith(resultado); // substitui o formulário pelo perfil
+        });
+    }
+}
+
+// Exporta a função para poder usar nos testes
+module.exports = { formatarPerfil };
