@@ -1,3 +1,19 @@
+function formatarPerfil(dados) {
+    return `
+        <h3>Perfil Salvo</h3>
+        <p><strong>Nome:</strong> ${dados.nome}</p>
+        <p><strong>Documento:</strong> ${dados.documento}</p>
+        <p><strong>Curso:</strong> ${dados.curso}</p>
+        <p><strong>Faculdade:</strong> ${dados.faculdade}</p>
+        <p><strong>Idade:</strong> ${dados.idade}</p>
+        <p><strong>Email:</strong> ${dados.email}</p>
+        <p><strong>Telefone:</strong> ${dados.telefone}</p>
+        <p><strong>Bio:</strong> ${dados.bio}</p>
+        <p><strong>LinkedIn:</strong> <a href="${dados.linkedin}" target="_blank">${dados.linkedin}</a></p>
+    `;
+}
+
+
 form.addEventListener("submit", function (event) {
     event.preventDefault();
 
@@ -16,18 +32,7 @@ form.addEventListener("submit", function (event) {
     const resultado = document.createElement("div");
     resultado.classList.add("perfil");
 
-    resultado.innerHTML = `
-        <h3>Perfil Salvo</h3>
-        <p><strong>Nome:</strong> ${dados.nome}</p>
-        <p><strong>Documento:</strong> ${dados.documento}</p>
-        <p><strong>Curso:</strong> ${dados.curso}</p>
-        <p><strong>Faculdade:</strong> ${dados.faculdade}</p>
-        <p><strong>Idade:</strong> ${dados.idade}</p>
-        <p><strong>Email:</strong> ${dados.email}</p>
-        <p><strong>Telefone:</strong> ${dados.telefone}</p>
-        <p><strong>Bio:</strong> ${dados.bio}</p>
-        <p><strong>LinkedIn:</strong> <a href="${dados.linkedin}" target="_blank">${dados.linkedin}</a></p>
-    `;
+    resultado.innerHTML = formatarPerfil(dados);
 
     form.replaceWith(resultado); // substitui o formulário pelo perfil
 });
